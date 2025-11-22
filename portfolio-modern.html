@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naman Matharu - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .light-text {
+            font-weight: 300;
+        }
+
+        .font-mono {
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        code, kbd, pre, samp {
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            z-index: 50;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            font-size: 0.875rem;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links a {
+            color: inherit;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.6;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 0;
+            width: 100%;
+        }
+
+        .hero-image-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .spacer {
+            height: 50px;
+        }
+
+        /* Projects Section */
+        .projects-section {
+            background-color: black;
+            color: white;
+            padding: 5rem 2rem;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .projects-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .projects-header h2 {
+            font-size: 0.875rem;
+            letter-spacing: 0.1em;
+            font-weight: 300;
+            line-height: 1.5;
+        }
+
+        .projects-header p {
+            font-size: 0.875rem;
+            letter-spacing: 0.1em;
+            font-weight: 300;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .project-card {
+            cursor: pointer;
+        }
+
+        .project-image-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            margin-bottom: 1rem;
+            aspect-ratio: 16 / 9;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s;
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.1);
+        }
+
+        .project-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .project-title {
+            font-size: 0.875rem;
+            font-weight: 300;
+        }
+
+        .project-subtitle {
+            font-size: 0.75rem;
+            font-weight: 300;
+            opacity: 0.7;
+        }
+
+        .project-year {
+            font-size: 0.875rem;
+            font-weight: 300;
+        }
+
+        .divider {
+            height: 1px;
+            background-color: white;
+            opacity: 0.1;
+            margin-bottom: 3rem;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 5rem 2rem;
+            background-color: white;
+        }
+
+        .dots-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .dot {
+            width: 0.5rem;
+            height: 0.5rem;
+            background-color: black;
+            border-radius: 50%;
+        }
+
+        .dot.faded {
+            opacity: 0.2;
+        }
+
+        .about-text {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .about-text p {
+            font-size: 1.125rem;
+            font-weight: 300;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .skill-card {
+            transform: scale(1);
+            transition: transform 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: scale(1.05);
+        }
+
+        .skill-image-wrapper {
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-image {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background-color: black;
+            color: white;
+            padding: 5rem 2rem;
+        }
+
+        .contact-container {
+            max-width: 896px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            font-size: 2.25rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-section p {
+            font-size: 1.125rem;
+            color: #d1d5db;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+        }
+
+        .contact-button {
+            padding: 0.75rem 2rem;
+            border: 1px solid white;
+            border-radius: 9999px;
+            color: white;
+            text-decoration: none;
+            font-weight: 300;
+            transition: all 0.3s;
+        }
+
+        .contact-button:hover {
+            background-color: white;
+            color: black;
+        }
+
+        /* Footer */
+        footer {
+            background-color: black;
+            color: white;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1.5rem 2rem;
+            margin-top: auto;
+        }
+
+        .footer-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footer-left, .footer-center, .footer-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .footer-text {
+            font-size: 0.875rem;
+            font-family: 'Roboto Mono', monospace;
+            letter-spacing: 0.05em;
+        }
+
+        .footer-button {
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .footer-button:hover {
+            transform: rotate(90deg);
+        }
+
+        .footer-time {
+            font-size: 0.875rem;
+            font-family: 'Roboto Mono', monospace;
+            letter-spacing: 0.1em;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .footer-cursor {
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .footer-cursor:hover {
+            color: #9ca3af;
+        }
+
+        .footer-social {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.5rem;
+        }
+
+        .social-link span {
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: 'Roboto Mono', monospace;
+            letter-spacing: 0.05em;
+        }
+
+        .social-link svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            transition: transform 0.3s;
+        }
+
+        .social-link:hover svg {
+            transform: translate(0.25rem, -0.25rem);
+        }
+
+        .social-link.linkedin:hover {
+            color: #60a5fa;
+        }
+
+        .social-link.behance:hover {
+            color: #3b82f6;
+        }
+
+        .social-link.instagram:hover {
+            color: #c026d3;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo light-text">NAMAN</div>
+            <div class="nav-links">
+                <a href="#work" class="light-text">Work</a>
+                <a href="#about" class="light-text">About</a>
+                <a href="#contact" class="light-text">Let's Connect</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-image-container">
+            <img 
+                src="hero-image-22-11-25.jpg" 
+                alt="Naman Matharu - Product & UX Design"
+                class="hero-image"
+            />
+        </div>
+        
+        <div class="spacer"></div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="work" class="projects-section">
+        <div class="container">
+            <div class="projects-header">
+                <h2 class="light-text">FOR ME<br>EVERY INTERACTION TELLS A STORY</h2>
+                <p class="light-text">PROJECTS</p>
+            </div>
+
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <a href="https://www.behance.net/namanmatharu/projects" target="_blank" class="project-card" style="text-decoration: none; color: inherit;">
+                    <div class="project-image-wrapper">
+                        <img 
+                            src="/Users/namanmatharu14gmail.com/Documents/Frame 1321319431.png" 
+                            alt="Modern Web Design"
+                            class="project-image"
+                        />
+                    </div>
+                    <div class="project-info">
+                        <div>
+                            <p class="project-title light-text">Aireez</p>
+                            <p class="project-subtitle light-text">Modern Web Design</p>
+                        </div>
+                        <p class="project-year light-text">2025</p>
+                    </div>
+                </a>
+
+                <!-- Project 2 -->
+                <a href="https://www.behance.net/namanmatharu/projects" target="_blank" class="project-card" style="text-decoration: none; color: inherit;">
+                    <div class="project-image-wrapper">
+                        <img 
+                            src="Slide_16_9_40.jpg" 
+                            alt="Infotainment Study - Interactive Dashboard"
+                            class="project-image"
+                            style="object-position: center bottom;"
+                        />
+                    </div>
+                    <div class="project-info">
+                        <div>
+                            <p class="project-title light-text">Infotainment Study</p>
+                            <p class="project-subtitle light-text">Measuring Screen Position Effects</p>
+                        </div>
+                        <p class="project-year light-text">2025</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="divider"></div>
+            <div class="divider"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="dots-container">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot faded"></div>
+                <div class="dot faded"></div>
+                <div class="dot"></div>
+                <div class="dot faded"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+
+            <div class="about-text">
+                <p class="light-text">
+                    Where creativity meets technology. I craft immersive digital experiences that blend thoughtful design with powerful functionality.
+                </p>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-image-wrapper">
+                        <img src="about-img-2.png" alt="Design Work 2" class="skill-image" />
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-image-wrapper">
+                        <img src="about-img-3.png" alt="Design Work 3" class="skill-image" />
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-image-wrapper">
+                        <img src="about-img-4.png" alt="Design Work 4" class="skill-image" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="contact-container">
+            <h2 class="light-text">Let's Create Together</h2>
+            <p class="light-text">
+                Have an exciting project in mind? Let's collaborate and bring your vision to life.
+            </p>
+            
+            <div class="contact-buttons">
+                <a href="mailto:namanmatharu14@gmail.com" class="contact-button light-text">
+                    Send Email
+                </a>
+                <a href="https://drive.google.com/file/d/1Z89WDG0ZO_mV9QTL2bIlfDyQht_Qf-Tb/view?usp=sharing" target="_blank" class="contact-button light-text">
+                    View Resume
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-left">
+                <span class="footer-text">2025 NAMAN MATHARU</span>
+                <button class="footer-button">+</button>
+            </div>
+
+            <div class="footer-center">
+                <span class="footer-text footer-cursor">PORTFOLIO</span>
+                <span style="font-size: 1.5rem;">✦</span>
+                <span class="footer-time" id="timeDisplay">12:00 PM</span>
+                <span style="font-size: 1.5rem;">✦</span>
+                <span style="font-size: 1.5rem;">✦</span>
+            </div>
+
+            <div class="footer-right">
+                <span class="footer-text">2025</span>
+                <button class="footer-button">✦</button>
+            </div>
+        </div>
+
+        <div class="footer-social">
+            <a href="https://www.linkedin.com/in/naman-deep-3a13a3320?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" class="social-link linkedin">
+                <span>LinkedIn</span>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L1 10m6-6l6 6"></path>
+                </svg>
+            </a>
+            <a href="https://www.behance.net/namanmatharu/projects" target="_blank" class="social-link behance">
+                <span>Behance</span>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L1 10m6-6l6 6"></path>
+                </svg>
+            </a>
+            <a href="https://www.instagram.com/naman.3._?igsh=MWc2MjhoNDFqMjNw&utm_source=qr" target="_blank" class="social-link instagram">
+                <span>Instagram</span>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L1 10m6-6l6 6"></path>
+                </svg>
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+
+        // Add scroll effect to navbar
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+            } else {
+                nav.style.boxShadow = 'none';
+            }
+        });
+
+        // Update time display
+        function updateTime() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const period = now.getHours() >= 12 ? 'PM' : 'AM';
+            document.getElementById('timeDisplay').textContent = `${hours}:${minutes} ${period}`;
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+
+</body>
+</html>
